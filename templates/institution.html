@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ institution.name }}</h2>
+<p>{{ institution.address }}</p>
+<a class="btn btn-primary" href="{{ url_for('add_employee', inst_id=institution.id) }}">Add Employee</a>
+<table class="table table-bordered mt-3">
+  <thead><tr><th>Employee</th><th>Email</th><th>Actions</th></tr></thead>
+  <tbody>
+    {% for emp in employees %}
+    <tr>
+      <td>{{ emp.name }}</td><td>{{ emp.email }}</td>
+      <td><a href="{{ url_for('employee_detail', emp_id=emp.id) }}">View</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
