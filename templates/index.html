@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<a class="btn btn-primary" href="{{ url_for('add_institution') }}">Add Institution</a>
+<table class="table table-striped mt-3">
+    <thead>
+        <tr><th>ID</th><th>Name</th><th>Email</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+        {% for inst in institutions %}
+        <tr>
+            <td>{{ inst.id }}</td>
+            <td>{{ inst.name }}</td>
+            <td>{{ inst.email }}</td>
+            <td><a href="{{ url_for('institution_detail', inst_id=inst.id) }}">View</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

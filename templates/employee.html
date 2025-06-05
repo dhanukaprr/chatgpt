@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ employee.name }}</h2>
+<a class="btn btn-primary" href="{{ url_for('add_payment', inst_id=employee.institution_id, emp_id=employee.id) }}">Add Payment</a>
+<a class="btn btn-primary" href="{{ url_for('apply_loan', emp_id=employee.id) }}">Apply Loan</a>
+<h4 class="mt-3">Payments</h4>
+<table class="table table-sm">
+  <thead><tr><th>Date</th><th>Type</th><th>Amount</th></tr></thead>
+  <tbody>
+    {% for p in payments %}
+    <tr><td>{{ p.payment_date }}</td><td>{{ p.payment_type }}</td><td>{{ p.amount }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+<h4>Loans</h4>
+<table class="table table-sm">
+  <thead><tr><th>Category</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead>
+  <tbody>
+    {% for l in loans %}
+    <tr>
+      <td>{{ l.category }}</td><td>{{ l.amount }}</td><td>{{ 'Approved' if l.approved else 'Pending' }}</td>
+      <td>{% if not l.approved %}<a href="{{ url_for('approve_loan', loan_id=l.id) }}">Approve</a>{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
